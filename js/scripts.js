@@ -82,15 +82,17 @@ function createCells (min, max, container, x) {
             container.append(cell);
 
             // console.log('Al giro ' + i + ' prendi il numero random ' + cell.innerHTML);
-
-            // Posso fare un array di tutte le cell?
-            const arrayCells = [];
         
+
+             
             
             // // Al click di ogni cella, la cella fa due cose diverse
             cell.addEventListener ('click',
             
                 function () {
+                    // Raccolta  del punteggio delle celle cliccate
+                    let punteggio = document.querySelectorAll('.clicked').length;
+                    console.log(punteggio);
 
                     for (let i = 0; i <= 16; i++) {
 
@@ -98,22 +100,26 @@ function createCells (min, max, container, x) {
                         if (this.innerHTML == numbersRandom[i]) {
                         this.classList.add('clicked-bomb');
 
-                        // Compare messaggio di sconfitta 
+                        // Compare messaggio del punteggio
                         const main = document.getElementById('my-main');
+                        const messagePunteggio = document.createElement('p');
+                        messagePunteggio.classList.add('paragraph');
+                        messagePunteggio.innerHTML = `Hai ottenuto il seguente punteggio: ${punteggio}`;
+                        
+                        main.append(messagePunteggio);
+
+                        // Compare messaggio di sconfitta 
                         const message = document.createElement('p');
                         message.classList.add('paragraph');
                         message.innerHTML = 'Mi dispiace, hai perso!';
                         
                         main.append(message);
 
-                        // Le altre celle non sono più cliccabili --> non riesco perchè non posso selezionare le altre celle
                         // Il pc segnala il numero di celle blu cliccate
 
-                            // Se cella è diversa da quella cliccata allora ha classe not-clicked
-                            if (cell !== this) {
-                                cell.classList.add('not-clicked');
-                            }
-
+                        // Le altre celle non sono più cliccabili si può tradurre in: refresh della pagina 
+                        // Così però lo fa subito --> c'è modo di ritardare?
+                        // window.location.reload();
 
                         }
 
