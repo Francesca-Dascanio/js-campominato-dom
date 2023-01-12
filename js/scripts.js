@@ -16,8 +16,7 @@ Aggiungere una select accanto al bottone di generazione, che fornisca una scelta
 */
 
 
-
-// funzione crea N celle con numero progressivo
+// funzione crea celle con numero progressivo
 function createCells (min, max, container, x) {
 
         //Crea N celle e inseriscile in un contenitore
@@ -27,8 +26,6 @@ function createCells (min, max, container, x) {
             const cell = document.createElement('div');
 
             cell.classList.add('stile-cella');
-            // cell.style.width =  `calc(100% / ${x})` ;
-            // cell.style.height =  `calc(100% / ${x})` ;
             cell.classList.add(`${x}`);
             cell.innerHTML = i;
             container.append(cell);
@@ -49,9 +46,6 @@ function createCells (min, max, container, x) {
     return createCells;
 }
 
-// Meglio dividere l'evento al click della singola cella oppure lo posso lasciare dentro alla stessa funzione?
-
-
 
 // Prendo opzione livello
 const sceltaLivello = document.getElementById('level');
@@ -62,18 +56,19 @@ console.log(sceltaLivello.value);
 const buttonPlay = document.getElementById('button-play');
 console.log(buttonPlay);
 
+// Prendo la mia griglia
+const myGrid = document.getElementById('grid');
+console.log(myGrid);
+
 
 // All'evento clicca il bottone play
 buttonPlay.addEventListener ('click',
 
     function () {
 
-        console.log(sceltaLivello.value);
-
+        myGrid.innerHTML = '';
+        
         if (sceltaLivello.value == 'facile') {
-
-            const myGrid = document.getElementById('grid');
-            console.log(myGrid);
 
             allCells = createCells (1, 100, myGrid, 'riga-dieci');
 
@@ -81,8 +76,6 @@ buttonPlay.addEventListener ('click',
 
         else if (sceltaLivello.value == 'media') {
 
-            const myGrid = document.getElementById('grid');
-            console.log(myGrid);
 
             allCells = createCells (1, 81, myGrid, 'riga-nove');
 
@@ -90,16 +83,14 @@ buttonPlay.addEventListener ('click',
 
         else if (sceltaLivello.value == 'difficile') {
 
-            const myGrid = document.getElementById('grid');
-            console.log(myGrid);
 
             allCells = createCells (1, 49, myGrid, 'riga-sette');
 
         }
 
+        
+
     }
-    // Per fermare il click: posso aggiungere solo 1 volta la griglia --> soluzione temporanea
-    , {once : true}
 
 );
 
