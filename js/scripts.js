@@ -86,14 +86,21 @@ function createCells (min, max, container, x) {
             
                 function () {
 
-                    if (cell.innerHTML == numbersRandom[3]) {
+                    for (let i = 0; i <= 16; i++) {
+
+                        // // Modifica condizioni if
+                        if (cell.innerHTML == numbersRandom[i]) {
                         cell.classList.add('clicked-bomb');
 
-                        // Qui dovrà uscire messaggio 'termina partita: hai perso'
-                    }
-                    else {
-                        cell.classList.add('clicked');
-                        console.log('Il numero della cella cliccata è: ', i);
+                        const message = document.createElement('p');
+                        
+
+                            // Qui dovrà uscire messaggio 'termina partita: hai perso'
+                        }
+                        else {
+                            cell.classList.add('clicked');
+                        }
+
                     }
                     
                     }
