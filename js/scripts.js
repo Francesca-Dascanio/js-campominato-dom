@@ -1,16 +1,19 @@
 /*
 
-L'utente clicca su un bottone che genererà una griglia di gioco quadrata.           OK
-Ogni cella ha un numero progressivo, da 1 a 100.                                    OK
-Ci saranno quindi 10 caselle per ognuna delle 10 righe.                             OK
+==Consegna==
 
-Quando l'utente clicca su ogni cella, la cella cliccata si colora di azzurro ed emetto un messaggio in console con il numero della cella cliccata. OK
 
-==Bonus==
-Aggiungere una select accanto al bottone di generazione, che fornisca una scelta tra tre diversi livelli di difficoltà: OK
-- con difficoltà 1 => 100 caselle, con un numero compreso tra 1 e 100, divise in 10 caselle per 10 righe;               OK
-- con difficoltà 2 => 81 caselle, con un numero compreso tra 1 e 81, divise in 9 caselle per 9 righe;
-- con difficoltà 3 => 49 caselle, con un numero compreso tra 1 e 49, divise in 7 caselle per 7 righe;
+Il computer deve generare 16 numeri casuali nello stesso range della difficoltà prescelta: le bombe. Attenzione: nella stessa cella può essere posizionata al massimo una bomba, perciò nell'array delle bombe non potranno esserci due numeri uguali.
+--- Creato array con i 16 numeri casuali da 1 a 100 e che non si ripetono
+--- Ora devo dire che se esce uno dei 16 numeri casuali contenuti nell'array, allora la cella si colora di rosso
+--- Ma per fare comparazione tra cella e numero devo far si che siano dello stesso tipo
+OK
+
+In seguito l'utente clicca su una cella: se il numero è presente nella lista dei numeri generati - abbiamo calpestato una bomba - la cella si colora di rosso e la partita termina. Altrimenti la cella cliccata si colora di azzurro e l'utente può continuare a cliccare sulle altre celle.
+
+La partita termina quando il giocatore clicca su una bomba o quando raggiunge il numero massimo possibile di numeri consentiti (ovvero quando ha rivelato tutte le celle che non sono bombe).
+
+Al termine della partita il software deve comunicare il punteggio, cioè il numero di volte che l'utente ha cliccato su una cella che non era una bomba.
 
 
 */
@@ -28,7 +31,7 @@ function createRandomNumbers () {
 
     let numberRandom;
 
-    let arrayNumbersRandom = [];
+    const arrayNumbersRandom = [];
 
     // Il numero casuale esce solo per 16 volte in modo univoco
     for (let r = 1; r <= 16; r++) {
@@ -61,26 +64,29 @@ console.log(numbersRandom);
 
 
 
-
-
 // funzione crea celle con numero progressivo
-function createCells (min, max, container, x) {
+function createCells (min, max, container, x) { 
+
 
         //Crea N celle e inseriscile in un contenitore
         for (let i = min; i <= max; i++ ) {
 
-            // Crea una nuova cella
+            // Crea una nuova cella 
             const cell = document.createElement('div');
             
-
+            // Dai classi e contenuto alla cella
             cell.classList.add('stile-cella');
             cell.classList.add(`${x}`);
-            // questo è il contenuto visibile all'utente su HTML
             cell.innerHTML = i;  
             
             container.append(cell);
 
+            // console.log('Al giro ' + i + ' prendi il numero random ' + cell.innerHTML);
 
+            // Posso fare un array di tutte le cell?
+            const arrayCells = [];
+        
+            
             // // Al click di ogni cella, la cella fa due cose diverse
             cell.addEventListener ('click',
             
@@ -88,10 +94,11 @@ function createCells (min, max, container, x) {
 
                     for (let i = 0; i <= 16; i++) {
 
-                        // // Modifica condizioni if
-                        if (cell.innerHTML == numbersRandom[i]) {
-                        cell.classList.add('clicked-bomb');
+                        // // Se la cella cliccata è uguale ad un numero random allora 
+                        if (this.innerHTML == numbersRandom[i]) {
+                        this.classList.add('clicked-bomb');
 
+                        // Compare messaggio di sconfitta 
                         const main = document.getElementById('my-main');
                         const message = document.createElement('p');
                         message.classList.add('paragraph');
@@ -99,11 +106,21 @@ function createCells (min, max, container, x) {
                         
                         main.append(message);
 
+                        // Le altre celle non sono più cliccabili --> non riesco perchè non posso selezionare le altre celle
+                        // Il pc segnala il numero di celle blu cliccate
 
-                        
+                            // Se cella è diversa da quella cliccata allora ha classe not-clicked
+                            if (cell !== this) {
+                                cell.classList.add('not-clicked');
+                            }
+
+
                         }
-                        else {
+
+                        else if (this.innerHTML !== numbersRandom[i]) {
                             cell.classList.add('clicked');
+
+                            // Finchè ho finito tutte le celle diverse dai 16 numeri random 
                         }
 
                     }
@@ -119,18 +136,9 @@ function createCells (min, max, container, x) {
 
 
 
-// Crea gruppo di numeri random generati
-// const numeriGenerati = [];
 
-// Verifica che ogni numero casuale uscito non venga ripetuto - manca l'evento: quando devo fare verifica?
-    // Finchè il gruppo numeri generati contiene quel numero random, continua la ricerca di un nuovo numero random; altrimenti quando ne ha trovato uno nuovo lo pusha nel gruppo. 
-    // while(numeriGenerati.includes(numberRandom)) {
-    //     numberRandom = createRandomNumber(1, 16);
-    // }
 
-    // numeriGenerati.push(numberRandom);
 
-    // console.log(numeriGenerati);
 
 
 

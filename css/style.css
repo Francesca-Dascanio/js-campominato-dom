@@ -79,6 +79,11 @@ main #grid {
     color: white;
 }
 
+.not-clicked {
+    background-color: aquamarine;
+    color: black;
+}
+
 
 /* Dimensioni celle */
 .riga-dieci {
