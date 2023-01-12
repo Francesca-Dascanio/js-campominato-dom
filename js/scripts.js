@@ -16,6 +16,7 @@ La partita termina quando il giocatore clicca su una bomba
 OK
 
 OPPURE quando raggiunge il numero massimo possibile di numeri consentiti (ovvero quando ha rivelato tutte le celle che non sono bombe).
+NON SO SE è GIUSTA ISTRUZIONE
 
 Al termine della partita il software deve comunicare il punteggio, cioè il numero di volte che l'utente ha cliccato su una cella che non era una bomba.
 OK
@@ -59,6 +60,7 @@ function createRandomNumbers () {
     }
 
     return arrayNumbersRandom
+
 
 }
 
@@ -209,13 +211,11 @@ buttonPlay.addEventListener ('click',
 
         else if (sceltaLivello.value == 'media') {
 
-
             allCells = createCells (1, 81, myGrid, 'riga-nove');
 
         }
 
         else if (sceltaLivello.value == 'difficile') {
-
 
             allCells = createCells (1, 49, myGrid, 'riga-sette');
 

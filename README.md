@@ -9,6 +9,7 @@ Il computer deve generare 16 numeri casuali nello stesso range della difficoltà
 --- Creato array con i 16 numeri casuali da 1 a 100 e che non si ripetono
 --- Ora devo dire che se esce uno dei 16 numeri casuali contenuti nell'array, allora la cella si colora di rosso
 --- Ma per fare comparazione tra cella e numero devo far si che siano dello stesso tipo
+OK
 
 In seguito l'utente clicca su una cella: se il numero è presente nella lista dei numeri generati - abbiamo calpestato una bomba - la cella si colora di rosso e la partita termina. Altrimenti la cella cliccata si colora di azzurro e l'utente può continuare a cliccare sulle altre celle.
 
