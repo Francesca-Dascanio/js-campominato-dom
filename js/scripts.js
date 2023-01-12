@@ -15,6 +15,53 @@ Aggiungere una select accanto al bottone di generazione, che fornisca una scelta
 
 */
 
+// Funzione per creare numero casuale 
+function createRandomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+
+
+
+// Funzione che crea un array di 16 numeri casuali; ogni numero può andare da 1 a 100
+function createRandomNumbers () {
+
+    let numberRandom;
+
+    let arrayNumbersRandom = [];
+
+    // Il numero casuale esce solo per 16 volte in modo univoco
+    for (let r = 1; r <= 16; r++) {
+    
+    // Crea numero random singolo
+    numberRandom = createRandomNumber (1, 100);
+
+    // Crea array per creare un gruppo di numeri generati all'interno dei 16 giri
+    const numeriGenerati = [];
+
+    while(numeriGenerati.includes(numberRandom)) {
+        console.log(numberRandom);
+    }
+
+    numeriGenerati.push(numberRandom);
+
+    console.log('Al giro ' + r + ' prendi il numero random ' + numberRandom);
+
+    arrayNumbersRandom.push(numberRandom);
+
+    }
+
+    return arrayNumbersRandom
+
+}
+
+// Crea la variabile dei 16 numeri casuali 
+const numbersRandom = createRandomNumbers();
+console.log(numbersRandom);
+
+
+
+
 
 // funzione crea celle con numero progressivo
 function createCells (min, max, container, x) {
@@ -24,19 +71,31 @@ function createCells (min, max, container, x) {
 
             // Crea una nuova cella
             const cell = document.createElement('div');
+            
 
             cell.classList.add('stile-cella');
             cell.classList.add(`${x}`);
-            cell.innerHTML = i;
+            // questo è il contenuto visibile all'utente su HTML
+            cell.innerHTML = i;  
+            
             container.append(cell);
 
 
-            // // Al click di ogni cella, la cella si colora di blu
+            // // Al click di ogni cella, la cella fa due cose diverse
             cell.addEventListener ('click',
             
                 function () {
-                    cell.classList.add('clicked');
-                    console.log('Il numero della cella cliccata è: ', i);
+
+                    if (cell.innerHTML == numbersRandom[3]) {
+                        cell.classList.add('clicked-bomb');
+
+                        // Qui dovrà uscire messaggio 'termina partita: hai perso'
+                    }
+                    else {
+                        cell.classList.add('clicked');
+                        console.log('Il numero della cella cliccata è: ', i);
+                    }
+                    
                     }
             
             )
@@ -47,18 +106,38 @@ function createCells (min, max, container, x) {
 }
 
 
+
+// Crea gruppo di numeri random generati
+// const numeriGenerati = [];
+
+// Verifica che ogni numero casuale uscito non venga ripetuto - manca l'evento: quando devo fare verifica?
+    // Finchè il gruppo numeri generati contiene quel numero random, continua la ricerca di un nuovo numero random; altrimenti quando ne ha trovato uno nuovo lo pusha nel gruppo. 
+    // while(numeriGenerati.includes(numberRandom)) {
+    //     numberRandom = createRandomNumber(1, 16);
+    // }
+
+    // numeriGenerati.push(numberRandom);
+
+    // console.log(numeriGenerati);
+
+
+
+
+
+
+
 // Prendo opzione livello
 const sceltaLivello = document.getElementById('level');
-console.log(sceltaLivello.value);
+// console.log(sceltaLivello.value);
 
 
 // Prendo bottone Play da HTML
 const buttonPlay = document.getElementById('button-play');
-console.log(buttonPlay);
+// console.log(buttonPlay);
 
 // Prendo la mia griglia
 const myGrid = document.getElementById('grid');
-console.log(myGrid);
+// console.log(myGrid);
 
 
 // All'evento clicca il bottone play

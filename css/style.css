@@ -73,6 +73,11 @@ main #grid {
     color: white;
 }
 
+.clicked-bomb {
+    background-color: darkred;
+    color: white;
+}
+
 
 /* Dimensioni celle */
 .riga-dieci {
