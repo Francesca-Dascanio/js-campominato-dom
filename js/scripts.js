@@ -10,11 +10,15 @@ Il computer deve generare 16 numeri casuali nello stesso range della difficoltà
 OK
 
 In seguito l'utente clicca su una cella: se il numero è presente nella lista dei numeri generati - abbiamo calpestato una bomba - la cella si colora di rosso e la partita termina. Altrimenti la cella cliccata si colora di azzurro e l'utente può continuare a cliccare sulle altre celle.
+OK
 
-La partita termina quando il giocatore clicca su una bomba o quando raggiunge il numero massimo possibile di numeri consentiti (ovvero quando ha rivelato tutte le celle che non sono bombe).
+La partita termina quando il giocatore clicca su una bomba
+OK
+
+OPPURE quando raggiunge il numero massimo possibile di numeri consentiti (ovvero quando ha rivelato tutte le celle che non sono bombe).
 
 Al termine della partita il software deve comunicare il punteggio, cioè il numero di volte che l'utente ha cliccato su una cella che non era una bomba.
-
+OK
 
 */
 
@@ -76,6 +80,7 @@ function createCells (min, max, container, x) {
             
             // Dai classi e contenuto alla cella
             cell.classList.add('stile-cella');
+            cell.classList.add('not-clicked');
             cell.classList.add(`${x}`);
             cell.innerHTML = i;  
             
@@ -96,18 +101,14 @@ function createCells (min, max, container, x) {
 
                     for (let i = 0; i <= 16; i++) {
 
+                        const main = document.getElementById('my-main');
+
                         // // Se la cella cliccata è uguale ad un numero random allora 
                         if (this.innerHTML == numbersRandom[i]) {
+                        this.classList.remove('not-clicked');
                         this.classList.add('clicked-bomb');
 
-                        // Compare messaggio del punteggio
-                        const main = document.getElementById('my-main');
-                        const messagePunteggio = document.createElement('p');
-                        messagePunteggio.classList.add('paragraph');
-                        messagePunteggio.innerHTML = `Hai ottenuto il seguente punteggio: ${punteggio}`;
                         
-                        main.append(messagePunteggio);
-
                         // Compare messaggio di sconfitta 
                         const message = document.createElement('p');
                         message.classList.add('paragraph');
@@ -115,7 +116,13 @@ function createCells (min, max, container, x) {
                         
                         main.append(message);
 
-                        // Il pc segnala il numero di celle blu cliccate
+                        // Compare messaggio del punteggio
+                        const messagePunteggio = document.createElement('p');
+                        messagePunteggio.classList.add('paragraph');
+                        messagePunteggio.innerHTML = `Hai ottenuto il seguente punteggio: ${punteggio}`;
+                        
+                        main.append(messagePunteggio);
+
 
                         // Le altre celle non sono più cliccabili si può tradurre in: refresh della pagina 
                         // Così però lo fa subito --> c'è modo di ritardare?
@@ -124,9 +131,36 @@ function createCells (min, max, container, x) {
                         }
 
                         else if (this.innerHTML !== numbersRandom[i]) {
-                            cell.classList.add('clicked');
+                            // Così escludo i 16 numeri random --> se cella è diversa da bomba
+                            // Ergo, prendi le celle non bomba
 
-                            // Finchè ho finito tutte le celle diverse dai 16 numeri random 
+                            // Posso cliccare finchè non sono finite tutte le celle not-clicked
+                            
+                            // let celleNonCliccate = document.querySelectorAll('.not-clicked').length;
+                            // // In questa fase è come se stessi dicendo 100? Si 
+
+                            // Finchè 
+                            let celleCliccate = 0;
+
+                            while (celleCliccate <= 84) {
+                                this.classList.remove('not-clicked');
+                                this.classList.add('clicked');
+
+                                celleCliccate++;   
+                                
+                               
+                            }
+
+                            // Quando celle cliccate è uguale a 84
+                            if (celleCliccate == 84) {
+                                const vittoria = document.createElement('p');
+                                vittoria.classList.add('paragraph');
+                                vittoria.innerHTML = 'HAI VINTO!';
+                                
+                                main.append(vittoria);
+                            }
+                           
+
                         }
 
                     }
@@ -139,12 +173,6 @@ function createCells (min, max, container, x) {
 
     return createCells;
 }
-
-
-
-
-
-
 
 
 
