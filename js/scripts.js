@@ -92,10 +92,15 @@ function createCells (min, max, container, x) {
                         if (cell.innerHTML == numbersRandom[i]) {
                         cell.classList.add('clicked-bomb');
 
+                        const main = document.getElementById('my-main');
                         const message = document.createElement('p');
+                        message.classList.add('paragraph');
+                        message.innerHTML = 'Mi dispiace, hai perso!';
                         
+                        main.append(message);
 
-                            // Qui dovrà uscire messaggio 'termina partita: hai perso'
+
+                        
                         }
                         else {
                             cell.classList.add('clicked');

@@ -48,6 +48,7 @@ main {
     height: 80vh;
     background-color: aquamarine;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
@@ -95,7 +96,10 @@ main #grid {
     height: calc(100% / 7);
 }
 
-
+/* Classe per dare stile al paragrafo */
+.paragraph {
+    padding-top: 1rem;
+}
 
 /* REGOLE FOOTER */
 footer .footer-container > * {
